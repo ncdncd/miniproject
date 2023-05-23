@@ -3,7 +3,9 @@ module.exports = {
   content: [
     "./src/**/*.{html,js}",
     './pages/**/*.{html,js}',
-    './components/**/*.{html,js}'],
+    './components/**/*.{html,js}',
+    "./node_modules/flowbite/**/*.js",
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
       sm: '480px',
@@ -26,6 +28,8 @@ module.exports = {
       }
     }
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ]
 }
 

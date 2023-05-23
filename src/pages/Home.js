@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { useEffect, useState } from "react"
 import axios from 'axios';
+import { Carousel } from 'flowbite-react';
 
 
 
@@ -32,10 +33,34 @@ const Home = () => {
   return (
     <div>
       <div>
+        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+          <Carousel>
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
+              alt="..."
+            />
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
+              alt="..."
+            />
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
+              alt="..."
+            />
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
+              alt="..."
+            />
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
+              alt="..."
+            />
+          </Carousel>
+      </div>
       {blogData.map((blog) => ( 
           <div className='flex flex-col items-center justify-evenly'>
               <div className='border-solid border-4 border-sky-800 bg-sky-600'>
-                  <Link to="/post/:${}">
+                  <Link to={`/post/${blog.id}`}>
                     <div >{blog.id}</div>
                     <div ><img alt='image' src="https://i.kym-cdn.com/photos/images/original/002/529/450/362.jpg"/></div>
                     <div className='font-bold' >{blog.title}</div>
