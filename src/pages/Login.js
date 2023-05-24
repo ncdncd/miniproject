@@ -41,7 +41,7 @@ function Login() {
 
         setTimeout(() => {
           navigate("/");
-      }, 4000);
+      }, 3000);
   };
 
   const initialValues = {
