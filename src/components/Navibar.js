@@ -9,7 +9,7 @@ import { Navbar } from 'flowbite-react';
 
 const Navibar = () => {
   return (
-  <div>
+  <div className=''>
     <Navbar
     class='bg-gray-800'
     fluid={true}

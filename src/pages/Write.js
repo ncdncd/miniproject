@@ -1,4 +1,5 @@
 import React from 'react'
+import withAuth from '../components/withAuth'
 
 function Write() {
   return (
@@ -6,4 +7,4 @@ function Write() {
   )
 }
 
-export default Write
+export default withAuth(Write);

@@ -18,11 +18,20 @@ import Footer from "./components/Footer";
 import Navibar from "./components/Navibar";
 import Verify from "./pages/Verify";
 import Verification from "./pages/Verification";
+import NavibarLogged from "./components/NavibarLogged";
+import Profile from "./pages/Profile";
+
+function LayoutLogged(){
+  if(localStorage.getItem("token")){
+    return <NavibarLogged/>
+  }
+    return <Navibar/>
+}
 
 const Layout = () => {
   return (
     <>
-    <Navibar/>
+    <LayoutLogged/>
     <Outlet/>
     <Footer/>
     </>
@@ -51,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home/>,
+      },
+      {
+        path: "/profile",
+        element: <Profile/>,
       },
     ],
   },

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from "yup"
+import { Label, TextInput, Button } from 'flowbite-react';
 
 import { LoginContext } from '../App'
 
@@ -38,7 +39,9 @@ function Login() {
           return;
         }
 
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+      }, 4000);
   };
 
   const initialValues = {
@@ -46,13 +49,11 @@ function Login() {
     email: '',
     password: '',
     phone:'',
-    password: '',
   }
 
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
-      <div className='bg-gray-900 flex items-center justify-center flex-col'>
-        <h1 className='text-white'>Welcome</h1>
+      <div className=''>
         <Formik 
         initialValues={initialValues}
         validationSchema={CreateSchema}
@@ -60,15 +61,16 @@ function Login() {
         className=''
         >
           {(props) => (
-            <form onSubmit={props.handleSubmit} className='flex flex-col items-center justify-center'>
-              <input
+            <form onSubmit={props.handleSubmit} className='flex flex-col gap-4'>
+              <div>
+              <TextInput
               type='text'
               placeholder='username'
               name='username'
               onChange={props.handleChange}
               value={props.values.username}
-              />
-              <input
+              /></div>
+              <TextInput
               required
               type='email'
               placeholder='email'
@@ -76,14 +78,14 @@ function Login() {
               onChange={props.handleChange}
               value={props.values.email}
               />
-              <input
+              <TextInput
               type='phone number'
               placeholder='phone number'
               name='phone'
               onChange={props.handleChange}
               value={props.values.phone}
               />
-              <input
+              <TextInput
               type='password'
               placeholder='password'
               name='password'
@@ -93,9 +95,9 @@ function Login() {
 
               <ErrorMessage name='password' component="div"/>
 
-              <button className='text-white' type="submit">Login</button>
-              <span className='text-white'>
-                Don't have an account yet? <Link to="/register">Register</Link>
+              <Button className='text-white' type="submit">Login</Button>
+              <span className='text-black'>
+                Don't have an account yet?  <Link className='hover:text-sky-600' to="/register">Register</Link>
               </span>
             </form>
           )}
