@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 import withAuth from '../components/withAuth'
 
@@ -32,6 +33,7 @@ function Profile() {
             <div className='flex flex-nowrap gap-1'><h1>Username:</h1><h1>{userData.username}</h1></div>
             <div className='flex flex-nowrap gap-1'><h1>e-mail: {userData.email}</h1></div>
             <div className='flex flex-nowrap gap-1'><h1>Phone Number: {userData.phone}</h1></div>
+            <div className='flex flex-nowrap gap-1'><h1><Link className="hover:bg-sky-600" to="/cpass">change password</Link></h1></div>
         </div>
     </div>
   )

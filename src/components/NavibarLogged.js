@@ -13,33 +13,30 @@ import axios from 'axios';
 
 const NavibarLogged = () => {
 
-  const [search, setSearch] = useState('');
+  const token = localStorage.getItem("token");
 
-  const handleChange = event => {
-    setSearch(event.target.value);
+  const [userData, setUserData] = useState({});
 
-    console.log('value is:', event.target.value);
-  };
+  useEffect(() => {
+    axios(
+        "https://minpro-blog.purwadhikabootcamp.com/api/auth/",
+        {
+            headers:{
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    )
+    .then((response) => {
+      setUserData(response.data)
+    })
+    .catch((err) => console.log(err))
+
+  }, [])
 
     function handleLogOut(){
         localStorage.removeItem("token");
     }
 
-    const handleSearch = (e) => {
-      e.preventDefault();
-      console.log(search);
-  
-      try{
-        axios(
-          `https://minpro-blog.purwadhikabootcamp.com/api/blog?sort=DESC&search=${search}`
-        );
-      }catch(error){
-        console.error(error);
-        return;
-      }
-  
-      // navigate("/verify")
-    };
 
   return (
   <div className=''>
@@ -59,10 +56,10 @@ const NavibarLogged = () => {
     >
       <Dropdown.Header>
         <span className="block text-sm">
-          Bonnie Green
+        {userData.username}
         </span>
         <span className="block truncate text-sm font-medium">
-          name@flowbite.com
+        {userData.email}
         </span>
       </Dropdown.Header>
       <Dropdown.Item>
@@ -85,38 +82,35 @@ const NavibarLogged = () => {
             <Navbar.Link href="/write" class='text-gray-100'>
               Write
             </Navbar.Link>
-     <form onSubmit={handleSearch}>
-        <div className="flex items-center">
-            <div className="flex space-x-1">
-              
-                <input
-                    type="text"
-                    className="block w-full px-1 py-1 text-sky-600 bg-white border rounded-full focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    placeholder="Search for article"
-                    onChange={handleChange}
-                    value={search}
-                />
-                <button className="px-2 text-white bg-sky-600 rounded-full ">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                    </svg>
-                </button>
-                
-            </div>
-        </div>
-  </form>
+            <Dropdown
+              label="Blog Categories"
+              inline={true}
+              className='text-white'
+            >
+              <Dropdown.Item>
+                Bisnis
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Ekonomi
+              </Dropdown.Item>
+              <Dropdown.Item>
+              <Link to="/btech">Teknologi</Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Olahraga
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Kuliner
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Internasional
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Fiksi
+              </Dropdown.Item>
+            </Dropdown>
           </Navbar.Collapse>
+          
     </Navbar>
   </div>
   )

@@ -6,6 +6,7 @@ import {
   Routes,
 } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
+import { Dropdown } from "flowbite-react";
 
 import "./styles.css"
 
@@ -22,6 +23,8 @@ import NavibarLogged from "./components/NavibarLogged";
 import Profile from "./pages/Profile";
 import BlogTeknologi from "./pages/categories/BlogTeknologi";
 import BlogOlahraga from "./pages/categories/BlogOlahraga";
+import BlogSearch from "./pages/categories/BlogSearch";
+import ChangePassword from "./pages/ChangePassword";
 
 function LayoutLogged(){
   if(localStorage.getItem("token")){
@@ -75,6 +78,10 @@ const router = createBrowserRouter([
         path: "/bolahraga",
         element: <BlogOlahraga/>,
       },
+      {
+        path: "/bsearch",
+        element: <BlogSearch/>,
+      },
     ],
   },
       {
@@ -92,6 +99,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login/>,
+      },
+      {
+        path: "/cpass",
+        element: <ChangePassword/>,
       },
 ]);
 

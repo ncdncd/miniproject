@@ -5,7 +5,7 @@ import {
   RouterProvider,
   Link
 } from "react-router-dom";
-import { Navbar } from 'flowbite-react';
+import { Navbar, Dropdown } from 'flowbite-react';
 
 const Navibar = () => {
   return (
@@ -36,6 +36,7 @@ const Navibar = () => {
             <Dropdown
               label="Blog Categories"
               inline={true}
+              className='text-white'
             >
               <Dropdown.Item>
                 Bisnis
