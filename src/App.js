@@ -20,6 +20,8 @@ import Verify from "./pages/Verify";
 import Verification from "./pages/Verification";
 import NavibarLogged from "./components/NavibarLogged";
 import Profile from "./pages/Profile";
+import BlogTeknologi from "./pages/categories/BlogTeknologi";
+import BlogOlahraga from "./pages/categories/BlogOlahraga";
 
 function LayoutLogged(){
   if(localStorage.getItem("token")){
@@ -64,6 +66,14 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile/>,
+      },
+      {
+        path: "/btech",
+        element: <BlogTeknologi/>,
+      },
+      {
+        path: "/bolahraga",
+        element: <BlogOlahraga/>,
       },
     ],
   },

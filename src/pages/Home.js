@@ -15,7 +15,7 @@ const Home = () => {
 
   const [blogData, setBlogs] = useState([]);
 
-  const url = "https://minpro-blog.purwadhikabootcamp.com/api/blog?id_cat=3&sort=ASC&page=1";
+  const url = "https://minpro-blog.purwadhikabootcamp.com/api/blog?sort=DESC";
 
   useEffect(() => {
     axios(url)

@@ -33,9 +33,32 @@ const Navibar = () => {
             <Navbar.Link href="/write" class="text-gray-100">
               Write
             </Navbar.Link>
-            <Navbar.Link href="/register" class="text-gray-100">
-              Register
-            </Navbar.Link>
+            <Dropdown
+              label="Blog Categories"
+              inline={true}
+            >
+              <Dropdown.Item>
+                Bisnis
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Ekonomi
+              </Dropdown.Item>
+              <Dropdown.Item>
+              <Link to="/btech">Teknologi</Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Olahraga
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Kuliner
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Internasional
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Fiksi
+              </Dropdown.Item>
+            </Dropdown>
           </Navbar.Collapse>
     </Navbar>
   </div>
