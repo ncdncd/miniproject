@@ -25,6 +25,8 @@ import BlogTeknologi from "./pages/categories/BlogTeknologi";
 import BlogOlahraga from "./pages/categories/BlogOlahraga";
 import BlogSearch from "./pages/categories/BlogSearch";
 import ChangePassword from "./pages/ChangePassword";
+import BlogTopTen from "./pages/categories/BlogTopTen";
+import ChangeUsername from "./pages/ChangeUsername";
 
 function LayoutLogged(){
   if(localStorage.getItem("token")){
@@ -82,6 +84,10 @@ const router = createBrowserRouter([
         path: "/bsearch",
         element: <BlogSearch/>,
       },
+      {
+        path: "/blogtopten",
+        element: <BlogTopTen/>,
+      },
     ],
   },
       {
@@ -103,6 +109,10 @@ const router = createBrowserRouter([
       {
         path: "/cpass",
         element: <ChangePassword/>,
+      },
+      {
+        path: "/cusername",
+        element: <ChangeUsername/>,
       },
 ]);
 

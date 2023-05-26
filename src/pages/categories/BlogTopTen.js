@@ -1,10 +1,12 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { Badge } from "flowbite-react";
 
 function BlogTopTen() {
 
     const [blogData, setBlogs] = useState([]);
-
+    const [likes, setLikes] = useState("")
 
   const url = "https://minpro-blog.purwadhikabootcamp.com/api/blog/pagFav";
 
@@ -13,12 +15,12 @@ function BlogTopTen() {
     .then((response) => {
       console.log(response.data);
       const blogs1 = response.data;
-      console.log(blogs1.result);
-      setBlogs(blogs1.result);
+      let array = blogs1.result.slice(0,10);
+      setBlogs(array);
     })
     .catch((err) => console.log(err))
 
-  }, [])
+  }, [likes])
 
   return (
     <div>
@@ -29,7 +31,7 @@ function BlogTopTen() {
                     <div >{blog.id}</div>
                     <div ><img className='max-w-xs' alt='image' src="https://i.kym-cdn.com/photos/images/original/002/529/450/362.jpg"/></div>
                     <div className='font-bold' >{blog.title}</div>
-                    <div>{blog.content}</div>
+                    <div>total favorites {blog.total_fav}</div>
                     <div className="flex flex-wrap gap-2">
                       <Badge color="info">
                         {blog.Category.name}

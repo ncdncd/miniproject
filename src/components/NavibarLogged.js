@@ -79,6 +79,9 @@ const NavibarLogged = () => {
             <Navbar.Link href="/" class='text-gray-100'>
               Home
             </Navbar.Link>
+            <Navbar.Link href="/blogtopten" class='text-gray-100'>
+              Top 10 Blog
+            </Navbar.Link>
             <Navbar.Link href="/write" class='text-gray-100'>
               Write
             </Navbar.Link>

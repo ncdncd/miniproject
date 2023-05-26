@@ -7,21 +7,67 @@ import {
 } from "react-router-dom";
 import { useEffect, useState } from "react"
 import axios from 'axios';
-import { Carousel, Badge, Dropdown, Navbar } from 'flowbite-react';
+import { Carousel, Badge, Dropdown, Navbar, Pagination } from 'flowbite-react';
 import { Formik,Form, Field } from 'formik';
+import 'boxicons';
 
 
 
 const Home = () => {
 
   const [blogData, setBlogs] = useState([]);
+  const [likes, setLikes] = useState("");
+  const [favData, setFavData] = useState([]);
 
-  const [search, setSearch] = useState('');
-  // const [cat, setCat] = useState('');
-  // const [sort, setSort] = useState('DESC');
+  useEffect((page) => {
+
+    axios(`https://minpro-blog.purwadhikabootcamp.com/api/blog/?page=${page}&sort=DESC`)
+    .then((response) => {
+      console.log(response.data);
+      const blogs1 = response.data;
+      console.log(blogs1.result);
+      setBlogs(blogs1.result);
+    })
+    .catch((err) => console.log(err))
+
+    console.log(blogData)
+
+  }, [])
+
+    const handlePageChange = () => {
+
+
+
+    }
+
+  
+
+
+    const handleClick = (goblogId) => {
+      const token = localStorage.getItem("token")
+
+      try{
+        axios.post(
+          "https://minpro-blog.purwadhikabootcamp.com/api/blog/like",
+          {BlogId: goblogId},
+          {
+            headers: {Authorization: `Bearer ${token}`},
+          },
+
+        ).then((response) => {
+            console.log(response.data);
+            setLikes(response);
+          });
+      }catch(error){
+        console.error(error);
+        return;
+      }
+
+      console.log(favData.id)
+    }
 
     const handleSearch = (values) => {
-      // e.preventDefault();
+    
 
       console.log(values.cat);
       console.log(values.sort);
@@ -32,9 +78,9 @@ const Home = () => {
           `https://minpro-blog.purwadhikabootcamp.com/api/blog?id_cat=${values.cat}&sort=${values.sort}&search=${values.search}`
         ).then((response) => {
             console.log(response.data);
-            const blogs1 = response.data;
-            console.log(blogs1.result);
-            setBlogs(blogs1.result);
+            const blogs3 = response.data;
+            console.log(blogs3.result);
+            setBlogs(blogs3.result);
           });
       }catch(error){
         console.error(error);
@@ -49,20 +95,24 @@ const Home = () => {
       cat:'',
     }
 
-  const url = "https://minpro-blog.purwadhikabootcamp.com/api/blog?sort=DESC";
+  
 
   useEffect(() => {
-    axios(url)
+    axios("https://minpro-blog.purwadhikabootcamp.com/api/blog/pagFav")
     .then((response) => {
       console.log(response.data);
-      const blogs1 = response.data;
-      console.log(blogs1.result);
-      setBlogs(blogs1.result);
+      const blogs2 = response.data;
+      let array = blogs2.result
+      setFavData(array);
     })
     .catch((err) => console.log(err))
 
-  }, [])
+  }, [likes])
 
+  if(blogData.length === 0) {
+    return "loading"
+  }
+  
 
   return (
     <div>
@@ -101,6 +151,7 @@ const Home = () => {
                   <option name="kuliner" >5</option>
                   <option name="internasional">6</option>
                   <option name="fiksi">7</option>
+                  <option name="semua"></option>
                 </select>
                 
                 <button className="px-2 text-white bg-sky-600 rounded-full ">
@@ -128,36 +179,12 @@ const Home = () => {
     </Navbar>
         <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
           <Carousel>
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
-              alt="..."
-            />
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
-              alt="..."
-            />
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
-              alt="..."
-            />
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
-              alt="..."
-            />
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BMzVlMDBhNTMtMzM1My00NDU3LWI3YjQtY2U5ZDgxY2MzZDAyXkEyXkFqcGdeQXVyNjMxNzQ2NTQ@._V1_.jpg"
-              alt="..."
-            />
-          </Carousel>
-      </div>
-      {blogData.map((blog) => ( 
-          <div className='flex flex-col items-center justify-evenly'>
-              <div className='border-solid border-4 border-sky-800 bg-sky-600'>
-                  <Link to={`/post/${blog.id}`}>
-                    <div >{blog.id}</div>
-                    <div ><img className='max-w-xs' alt='image' src="https://i.kym-cdn.com/photos/images/original/002/529/450/362.jpg"/></div>
+          {blogData.map((blog) => ( 
+          <div className='flex h-full items-center justify-center  bg-sky-600 dark:bg-gray-700 dark:text-white'>
+              <div>
+                  <Link to={`/post/${blog.id}`} className='flex'>
+                    <div ><img className='max-w-xs' alt='image' src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/></div>
                     <div className='font-bold' >{blog.title}</div>
-                    <div>{blog.content}</div>
                     <div className="flex flex-wrap gap-2">
                       <Badge color="info">
                         {blog.Category.name}
@@ -167,7 +194,34 @@ const Home = () => {
               </div>
           </div>
       ))}
+          </Carousel>
       </div>
+      {blogData.map((blog) => ( 
+          <div className='flex flex-col items-center justify-evenly'>
+              <div className='border-solid border-4 border-sky-800 bg-sky-600'>
+                  <Link to={`/post/${blog.id}`}>
+                    <div >{blog.id}</div>
+                    <div ><img className='max-w-xs' alt='image' src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/></div>
+                    <div className='font-bold' >{blog.title}</div>
+                    <div>{blog.content}</div>
+                    <div>written by {blog.User.username}</div>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge color="info">
+                        {blog.Category.name}
+                      </Badge>
+                    </div>
+                  </Link>
+                  </div>
+                  <button onClick={() => handleClick(blog.id)}><i className='bx bx-tada-hover bxs-heart'></i></button>
+            {/* <Pagination
+              currentPage={1}
+              onPageChange={handlePageChange()}
+              totalPages={100}
+            /> */}
+        </div>
+      ))}
+      </div>
+      
     </div>
   )
 }
