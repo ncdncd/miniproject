@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react"
 import axios from 'axios';
 import { Carousel, Badge, Dropdown, Navbar, Pagination, Avatar} from 'flowbite-react';
-import { Formik,Form, Field } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import 'boxicons';
 
 

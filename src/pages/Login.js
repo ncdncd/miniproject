@@ -116,6 +116,9 @@ function Login() {
               <span className='text-black'>
                 Don't have an account yet?  <Link className='hover:text-sky-600' to="/register">Register</Link>
               </span>
+              <span className='text-black'>
+               <Link className='hover:text-sky-600' to="/forgotpass">forgot password</Link>
+              </span>
             </form>
           )}
 

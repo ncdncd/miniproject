@@ -30,6 +30,8 @@ import ChangeUsername from "./pages/ChangeUsername";
 import ChangeEmail from "./pages/ChangeEmail";
 import ChangePhone from "./pages/ChangePhone";
 import ChangeProfileP from "./pages/ChangeProfileP";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/resetPassword";
 
 
 function LayoutLogged(){
@@ -129,6 +131,14 @@ const router = createBrowserRouter([
       {
         path: "/changepp",
         element: <ChangeProfileP/>,
+      },
+      {
+        path: "/forgotpass",
+        element: <ForgotPassword/>,
+      },
+      {
+        path: "/resetpass",
+        element: <ResetPassword/>,
       },
 ]);
 

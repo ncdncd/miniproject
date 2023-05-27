@@ -15,6 +15,7 @@ function Profile() {
     const [userData, setUserData] = useState({});
     const [myBlogData, setMyBlogs] = useState([]);
     const [favBlog, setMyFavBlogs] = useState([]);
+    const [currentBlog, setCurrentBlog] = useState("")
     const [modalOpen, setModalOpen] = useState(false);
 
 
@@ -96,13 +97,15 @@ function Profile() {
 
   };
 
-  const handleToggleModal = (id) => {
+  const handleToggleModal = () => {
     setModalOpen(!modalOpen);
   };
+
 
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+
 
   const profileImg = (imgsrc) => {
     if(imgsrc === null){
@@ -127,6 +130,7 @@ function Profile() {
             <div className='flex flex-nowrap gap-1'><h1>Phone Number: {userData.phone}</h1></div>
             <h1><Link className="hover:bg-sky-600" to="/cphone">change phone number</Link></h1>
             <div className='flex flex-nowrap gap-1'><h1><Link className="hover:bg-sky-600" to="/cpass">change password</Link></h1></div>
+            <div className='flex flex-nowrap gap-1'><h1><Link className="hover:bg-sky-600" to="/resetpass">reset password</Link></h1></div>
             <br/>
 
             {/* <Button onClick={handleToggleModal}>
@@ -151,9 +155,7 @@ function Profile() {
                     </div>
                   </Link>
                   </div>
-                  <button onClick={handleToggleModal}><i class='bx bxs-trash bx-burst-hover'></i></button>
-                  {/* <button onClick={() => handleDelete(blog.id)}><i class='bx bxs-trash bx-burst-hover'></i></button> */}
-                  <Modal
+                  {/* <Modal
                     onClose={handleCloseModal}
                     popup
                     show = {modalOpen}
@@ -169,7 +171,7 @@ function Profile() {
                           <div className="flex justify-center gap-4">
                             <Button
                               color="failure"
-                              onClick={() => handleDelete()}
+                              onClick={() => handleDelete(blog.id)}
                             >
                               Yes, I'm sure
                               {blog.id}
@@ -181,10 +183,15 @@ function Profile() {
                               No, cancel
                               </Button>
                             </div>
+                    
                           </div>
                         </Modal.Body>
-                      </Modal>
+                      </Modal> */}
+                  {/* <button onClick={handleToggleModal}><i class='bx bxs-trash bx-burst-hover'></i></button> */}
+                  <button onClick={() => { if (window.confirm('Are you sure you wish to delete this post?')) handleDelete(blog.id) }}><i class='bx bxs-trash bx-burst-hover'></i></button>
                 </div>
+  
+
               ))}
               </div>
             </h1>
