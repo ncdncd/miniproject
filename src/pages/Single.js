@@ -47,24 +47,37 @@ function Single() {
   return (
     
 
-    <div>
-      <div className='flex h-full items-center justify-center  bg-sky-600'>
-              <div>
-                    <div><img src={`https://minpro-blog.purwadhikabootcamp.com/${blogData[0].imageURL}`}></img></div>
-                    <div className='font-bold' >{blogData[0].title}</div>
-                    <div>{blogData[0].content}</div>
-                    <div>written by {blogData[0].User.username}</div>
-                    <div className="flex flex-wrap gap-2">
+            <div className='bg-white p-4 shadow-sm rounded-sm'>
+                  <Link to={`/post/${blogData[0].id}`} className='overflow-hidden block'>
+                    <div >{blogData[0].id}</div> 
+                      <img className='w-full h-96 object-cover rounded transform hover:scale-110 transition duration-500' alt='image' 
+                      src={`https://minpro-blog.purwadhikabootcamp.com/${blogData[0].imageURL}`}/>
+                    </Link>
+                    <div className='p-4'>
+                      <Link to={`/post/${blogData[0].id}`}>
+                      <h2 className='text-2xl font-semibold text-gray-700 hover:text-blue-500 transition'>
+                        {blogData[0].title}
+                      </h2>
+                      </Link>
+                      <p className='text-gray-500 text-sm mt-2'>
+                        {blogData[0].content}
+                      </p>
+                    </div>
+                    <div className='flex mt-3 space-x-5'>
+                    <div className='mr-2 text-xs'>written by {blogData[0].User.username}</div>
+                    <div className="">
                       <Avatar img={profileImg(blogData[0].User.imgProfile)} />
                     </div>
-                    <div className="flex flex-wrap gap-2">
+                    <div className='mr-2 text-xs'>date posted: {blogData[0].createdAt.slice(0,10)}</div>
+                    <div className='mr-2 text-xs'>time posted: {blogData[0].createdAt.slice(11,16)}</div>
+                    <div className="">
                       <Badge color="info">
                         {blogData[0].Category.name}
                       </Badge>
                     </div>
-              </div>
-          </div>
-    </div>
+                    </div>
+                  
+                  </div>
   )
 }
 

@@ -79,7 +79,7 @@ const router = createBrowserRouter([
         element: <Profile/>,
       },
       {
-        path: "/btech",
+        path: "/btekno",
         element: <BlogTeknologi/>,
       },
       {

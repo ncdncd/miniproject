@@ -23,25 +23,36 @@ function BlogTopTen() {
   }, [likes])
 
   return (
-    <div>
-        {blogData.map((blog) => ( 
-          <div className='flex flex-col items-center justify-evenly'>
-              <div className='border-solid border-4 border-sky-800 bg-sky-600'>
-                  <Link to={`/post/${blog.id}`}>
-                    <div >{blog.id}</div>
-                    <div ><img className='max-w-xs' alt='image' src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/></div>
-                    <div className='font-bold' >{blog.title}</div>
-                    <div>total favorites {blog.total_fav}</div>
-                    <div className="flex flex-wrap gap-2">
+    <div className='flex flex-col mt-4'>
+      {blogData.map((blog) => ( 
+          
+              <div className='bg-gray-800 p-4 border-solid border-black border-4 shadow-sm rounded-sm'>
+                  <Link to={`/post/${blog.id}`} className='overflow-hidden block'>
+                    <div className="text-gray-300">{blog.id}</div> 
+                
+                    </Link>
+                    <div className='p-4'>
+                      <Link to={`/post/${blog.id}`}>
+                      <h2 className='text-2xl font-semibold text-gray-200 hover:text-blue-500 transition'>
+                        {blog.title}
+                      </h2>
+                      </Link>
+                      <p className='text-gray-300 text-sm mt-2'>
+                        amount of likes: {blog.total_fav}
+                      </p>
+                    </div>
+                    <div className='flex mt-3 space-x-5'>
+                    <div className="">
                       <Badge color="info">
                         {blog.Category.name}
                       </Badge>
                     </div>
-                  </Link>
-              </div>
-          </div>
+                    </div>
+                  
+                  </div>
+
       ))}
-    </div>
+      </div>
   )
 }
 

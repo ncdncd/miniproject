@@ -189,48 +189,130 @@ const Home = () => {
       )}
     </Formik>
     </Navbar>
-        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+        
+      <div className='py-12 bg-gray-100 min-h-screen'>
+      <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
           <Carousel>
           {blogData.map((blog) => ( 
-          <div className='flex h-full items-center justify-center  bg-sky-600 dark:bg-gray-700 dark:text-white'>
+          <div className='relative h-full w-full'>
               <div>
-                  <Link to={`/post/${blog.id}`} className='flex'>
-                    <div ><img className='max-w-xs' alt='image' src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/></div>
-                    <div className='font-bold' >{blog.title}</div>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge color="info">
-                        {blog.Category.name}
-                      </Badge>
+                  <Link to={`/post/${blog.id}`}>
+                    <div ><img className='h-full w-full object-cover' alt='image' src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/></div>
+                      <div className='absolute inset-0 grid h-full w-full place-items-center bg-black/25' >
+                        <div className="w-3/4 text-center md:w-2/4">
+                          <h1 className='mb-4 text-3xl md:text-4xl lg:text-5xl text-white '>{blog.title}</h1>
+                        <div className="">
+                          <Badge color="info">
+                            {blog.Category.name}
+                          </Badge>
+                        </div>
+                      </div>
                     </div>
                   </Link>
               </div>
           </div>
       ))}
           </Carousel>
+        </div>
+        <div className='container mx-auto px-4 flex'>
+            <div className='w-3/12'>
+              <div className='bg-white shadow-sm rounded-sm p-4'>
+                <h3 className='text-xl font-semibold text-gray-700 mb-3'>Categories</h3>
+                <div className='text-gray-700 space-y-2'>
+                  <Link to="/bisnis" className='flex items-center font-semibold leading-4 uppercase text-sm hover:text-blue-500 transition'>
+                      <span>Bisnis</span>
+                  </Link>
+                  <Link to="/bekonomi" className='flex items-center font-semibold leading-4 uppercase text-sm hover:text-blue-500 transition'>
+                      <span>Ekonomi</span>
+                  </Link>
+                  <Link to="/btekno" className='flex items-center font-semibold leading-4 uppercase text-sm hover:text-blue-500 transition'>
+                      <span>Teknologi</span>
+                  </Link>
+                  <Link to="/bolahraga" className='flex items-center font-semibold leading-4 uppercase text-sm hover:text-blue-500 transition'>
+                      <span>Olahraga</span>
+                  </Link>
+                  <Link to="/bkuli" className='flex items-center font-semibold leading-4 uppercase text-sm hover:text-blue-500 transition'>
+                      <span>Kuliner</span>
+                  </Link>
+                  <Link to="/binter" className='flex items-center font-semibold leading-4 uppercase text-sm hover:text-blue-500 transition'>
+                      <span>Internasional</span>
+                  </Link>
+                  <Link to="/bfiksi" className='flex items-center font-semibold leading-4 uppercase text-sm hover:text-blue-500 transition'>
+                      <span>Fiksi</span>
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+        
+
+        <div className='w-6/12 mx-6'>
+          <div className='bg-white shadow-sm rounded-sm'>
+                <Link to={`/post/${blogData[0].id}`} className='overflow-hidden block'>
+                      <img className='w-full h-96 object-cover rounded transform hover:scale-110 transition' alt='image' 
+                      src={`https://minpro-blog.purwadhikabootcamp.com/${blogData[0].imageURL}`}/>
+                </Link>
+                <div className='p-4'>
+                  <Link to={`/post/${blogData[0].id}`}>
+                    <h2 className='text-2xl font-semibold text-gray-700 hover:text-blue-500 transition'>
+                        {blogData[0].title}
+                    </h2>
+                  </Link>
+                  <p className='text-gray-500 text-sm mt-2'>
+                      {blogData[0].content}
+                  </p>
+                  <div className='flex mt-3'>
+                    <div className='flex items-center text-gray-400 text-sm'>
+                    {blogData[0].User.username}
+                    </div>
+
+                  </div>
+                </div>
+
+          </div>
+          
+          </div>
+        </div>
+
       </div>
+      <div className='grid grid-cols-2 mt-4'>
       {blogData.map((blog) => ( 
-          <div className='flex flex-col items-center justify-evenly'>
-              <div className='border-solid border-4 border-sky-800 bg-sky-600'>
-                  <Link to={`/post/${blog.id}`}>
-                    <div >{blog.id}</div>
-                    <div ><img className='max-w-xs' alt='image' src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/></div>
-                    <div className='font-bold' >{blog.title}</div>
-                    <div>{blog.content}</div>
-                    <div>written by {blog.User.username}</div>
-                    <div className="flex flex-wrap gap-2">
+          
+              <div className='bg-white p-4 shadow-sm rounded-sm'>
+                  <Link to={`/post/${blog.id}`} className='overflow-hidden block'>
+                    <div >{blog.id}</div> 
+                      <img className='w-full h-60 object-cover rounded transform hover:scale-110 transition duration-500' alt='image' 
+                      src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/>
+                    </Link>
+                    <div className='p-4'>
+                      <Link to={`/post/${blog.id}`}>
+                      <h2 className='text-2xl font-semibold text-gray-700 hover:text-blue-500 transition'>
+                        {blog.title}
+                      </h2>
+                      </Link>
+                      <p className='text-gray-500 text-sm mt-2'>
+                        {blog.content}
+                      </p>
+                    </div>
+                    <div className='flex mt-3 space-x-5'>
+                    <div className='mr-2 text-xs'>written by {blog.User.username}</div>
+                    <div className="">
                       <Avatar img={profileImg(blog.User.imgProfile)} />
                     </div>
-                    <div className="flex flex-wrap gap-2">
+                    <div className='mr-2 text-xs'>date posted: {blog.createdAt.slice(0,10)}</div>
+                    <div className='mr-2 text-xs'>time posted: {blog.createdAt.slice(11,16)}</div>
+                    <div className="">
                       <Badge color="info">
                         {blog.Category.name}
                       </Badge>
+                      <button onClick={() => handleClick(blog.id)}><i className='bx bx-tada-hover bxs-heart'></i></button>
                     </div>
-                  </Link>
+                    </div>
+                  
                   </div>
-                  <button onClick={() => handleClick(blog.id)}><i className='bx bx-tada-hover bxs-heart'></i></button>
-            
-        </div>
+
       ))}
+      </div>
         <Pagination
           currentPage={currentPage}
           onPageChange={onPageChange}

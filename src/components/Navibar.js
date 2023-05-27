@@ -27,13 +27,16 @@ const Navibar = () => {
         <Navbar.Toggle />
       </div>
           <Navbar.Collapse className='text-gray-100'>
-            <Navbar.Link href="/" class="text-gray-100">
+            <Navbar.Link href="/" class="text-gray-100 hover:text-blue-500 transition">
               Home
             </Navbar.Link>
-            <Navbar.Link href="/write" class="text-gray-100">
+            <Navbar.Link href="/blogtopten" class='text-gray-100 hover:text-blue-500 transition'>
+              Top 10 Blog
+            </Navbar.Link>
+            <Navbar.Link href="/write" class="text-gray-100 hover:text-blue-500 transition">
               Write
             </Navbar.Link>
-            <Dropdown
+            {/* <Dropdown
               label="Blog Categories"
               inline={true}
               className='text-white'
@@ -59,7 +62,7 @@ const Navibar = () => {
               <Dropdown.Item>
                 Fiksi
               </Dropdown.Item>
-            </Dropdown>
+            </Dropdown> */}
           </Navbar.Collapse>
     </Navbar>
   </div>
