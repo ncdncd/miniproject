@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
@@ -20,6 +20,12 @@ function Login() {
   const { setToken } = useContext(LoginContext);
 
   const navigate = useNavigate();
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  function togglePasswordVisibility() {
+    setIsPasswordVisible((prevState) => !prevState);
+  }
 
   const handleSubmit = ( values, action ) =>{
     console.log(values);
@@ -43,6 +49,11 @@ function Login() {
           navigate("/");
       }, 3000);
   };
+
+  function testFunction() {
+    handlePasswordChange();
+    handleChange();
+}
 
   const initialValues = {
     username:'',
@@ -86,12 +97,22 @@ function Login() {
               value={props.values.phone}
               />
               <TextInput
-              type='password'
+              type={isPasswordVisible ? "text" : "password"}
               placeholder='password'
               name='password'
               onChange={props.handleChange}
               value={props.values.password}
               />
+              <label className="flex items-center mt-2">
+                <input
+                  type="checkbox"
+                  className="mr-2 w-4 h-4"
+                  checked={isPasswordVisible}
+                  onChange={togglePasswordVisibility}
+                />
+                <span className="text-sm text-gray-600">Show password</span>
+              </label>
+
 
               <ErrorMessage name='password' component="div"/>
 

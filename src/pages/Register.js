@@ -1,8 +1,8 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { Formik, Form, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import { Label, TextInput, Button } from 'flowbite-react';
 
 
@@ -10,6 +10,12 @@ import { Label, TextInput, Button } from 'flowbite-react';
 function Register() {
 
   const navigate = useNavigate();
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  function togglePasswordVisibility() {
+    setIsPasswordVisible((prevState) => !prevState);
+  }
 
   const handleSubmit = (values, action) => {
     console.log(values);
@@ -117,12 +123,22 @@ function Register() {
             </div>
 
               <TextInput
-              type='password'
+              type={isPasswordVisible ? "text" : "password"}
               placeholder='password'
               name='password'
               onChange={props.handleChange}
               value={props.values.password}
               />
+              <label className="flex items-center mt-2">
+                <input
+                  type="checkbox"
+                  className="mr-2 w-4 h-4"
+                  checked={isPasswordVisible}
+                  onChange={togglePasswordVisibility}
+                />
+                <span className="text-sm text-gray-600">Show password</span>
+              </label>
+
             <ErrorMessage name="password" component="div" />
               <TextInput
               type='password'

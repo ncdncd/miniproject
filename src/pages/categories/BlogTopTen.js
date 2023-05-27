@@ -29,7 +29,7 @@ function BlogTopTen() {
               <div className='border-solid border-4 border-sky-800 bg-sky-600'>
                   <Link to={`/post/${blog.id}`}>
                     <div >{blog.id}</div>
-                    <div ><img className='max-w-xs' alt='image' src="https://i.kym-cdn.com/photos/images/original/002/529/450/362.jpg"/></div>
+                    <div ><img className='max-w-xs' alt='image' src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/></div>
                     <div className='font-bold' >{blog.title}</div>
                     <div>total favorites {blog.total_fav}</div>
                     <div className="flex flex-wrap gap-2">

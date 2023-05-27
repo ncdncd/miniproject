@@ -37,6 +37,13 @@ const NavibarLogged = () => {
         localStorage.removeItem("token");
     }
 
+    const profileImg = (imgsrc) => {
+      if(imgsrc === null){
+        return 'https://images.gamebanana.com/img/ss/mods/5c6976de51561.jpg'
+      }else{
+        return `https://minpro-blog.purwadhikabootcamp.com/${imgsrc}`
+      }
+    }
 
   return (
   <div className=''>
@@ -52,7 +59,7 @@ const NavibarLogged = () => {
     <Dropdown
       arrowIcon={false}
       inline={true}
-      label={<Avatar alt="User settings" img="https://images.gamebanana.com/img/ss/mods/5c6976de51561.jpg" rounded={true}/>}
+      label={<Avatar alt="User settings" img={profileImg(userData.imgProfile)} rounded={true}/>}
     >
       <Dropdown.Header>
         <span className="block text-sm">
@@ -64,9 +71,6 @@ const NavibarLogged = () => {
       </Dropdown.Header>
       <Dropdown.Item>
         <Link to="/profile">Profile</Link>
-      </Dropdown.Item>
-      <Dropdown.Item>
-        Settings
       </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item >

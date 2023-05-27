@@ -3,11 +3,12 @@ import {
   createBrowserRouter,
   Outlet,
   RouterProvider,
-  Link
+  Link,
+  useNavigate
 } from "react-router-dom";
 import { useEffect, useState } from "react"
 import axios from 'axios';
-import { Carousel, Badge, Dropdown, Navbar, Pagination } from 'flowbite-react';
+import { Carousel, Badge, Dropdown, Navbar, Pagination, Avatar} from 'flowbite-react';
 import { Formik,Form, Field } from 'formik';
 import 'boxicons';
 
@@ -18,6 +19,8 @@ const Home = () => {
   const [blogData, setBlogs] = useState([]);
   const [likes, setLikes] = useState("");
   const [favData, setFavData] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect((page) => {
 
@@ -34,19 +37,12 @@ const Home = () => {
 
   }, [])
 
-    const handlePageChange = () => {
-
-
-
-    }
-
-  
-
-
     const handleClick = (goblogId) => {
       const token = localStorage.getItem("token")
 
-      try{
+      if(token === null){
+          navigate("/login");
+      }else{
         axios.post(
           "https://minpro-blog.purwadhikabootcamp.com/api/blog/like",
           {BlogId: goblogId},
@@ -58,12 +54,8 @@ const Home = () => {
             console.log(response.data);
             setLikes(response);
           });
-      }catch(error){
-        console.error(error);
-        return;
       }
 
-      console.log(favData.id)
     }
 
     const handleSearch = (values) => {
@@ -110,7 +102,15 @@ const Home = () => {
   }, [likes])
 
   if(blogData.length === 0) {
-    return "loading"
+    return "no blogs found"
+  }
+
+  const profileImg = (imgsrc) => {
+    if(imgsrc === null){
+      return 'https://images.gamebanana.com/img/ss/mods/5c6976de51561.jpg'
+    }else{
+      return `https://minpro-blog.purwadhikabootcamp.com/${imgsrc}`
+    }
   }
   
 
@@ -205,6 +205,9 @@ const Home = () => {
                     <div className='font-bold' >{blog.title}</div>
                     <div>{blog.content}</div>
                     <div>written by {blog.User.username}</div>
+                    <div className="flex flex-wrap gap-2">
+                      <Avatar img={profileImg(blog.User.imgProfile)} />
+                    </div>
                     <div className="flex flex-wrap gap-2">
                       <Badge color="info">
                         {blog.Category.name}

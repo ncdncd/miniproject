@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
-import { Badge } from 'flowbite-react';
+import { Badge, Modal, Button, Label, TextInput, Checkbox } from 'flowbite-react';
 
 
 import withAuth from '../components/withAuth'
@@ -14,6 +14,8 @@ function Profile() {
     
     const [userData, setUserData] = useState({});
     const [myBlogData, setMyBlogs] = useState([]);
+    const [favBlog, setMyFavBlogs] = useState([]);
+
 
   useEffect(() => {
     axios(
@@ -50,9 +52,23 @@ function Profile() {
 
   }, [])
 
-  if(myBlogData.length === 0) {
-    return "loading"
-  }
+  useEffect(() => {
+    axios("https://minpro-blog.purwadhikabootcamp.com/api/blog/pagLike",
+    {
+      headers:{
+          Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+    .then((response) => {
+      console.log(response.data);
+      const blogs1 = response.data;
+      console.log(blogs1.result);
+      setMyFavBlogs(blogs1.result);
+    })
+    .catch((err) => console.log(err))
+
+  }, [])
 
   const handleDelete = (postId, action) => {
     console.log(postId);
@@ -79,14 +95,30 @@ function Profile() {
 
   };
 
+  console.log(userData)
+
+  const profileImg = (imgsrc) => {
+    if(imgsrc === null){
+      return 'https://images.gamebanana.com/img/ss/mods/5c6976de51561.jpg'
+    }else{
+      return `https://minpro-blog.purwadhikabootcamp.com/${imgsrc}`
+    }
+  }
+
   return (
     <div>
         <div className='flex flex-col align-middle justify-center'>Profile
-            <img className='w-60' src="https://images.gamebanana.com/img/ss/mods/5c6976de51561.jpg"/>
+            <img className='w-60' src={profileImg(userData.imgProfile)}/>
+          <div>
+
+            <Link to="/changepp" className='flex'><i class='bx bxs-camera'></i></Link>
+          </div>
             <div className='flex flex-nowrap gap-1'><h1>Username:</h1><h1>{userData.username}</h1></div>
             <h1><Link className="hover:bg-sky-600" to="/cusername">change username</Link></h1>
             <div className='flex flex-nowrap gap-1'><h1>e-mail: {userData.email}</h1></div>
+            <h1><Link className="hover:bg-sky-600" to="/cemail">change email</Link></h1>
             <div className='flex flex-nowrap gap-1'><h1>Phone Number: {userData.phone}</h1></div>
+            <h1><Link className="hover:bg-sky-600" to="/cphone">change phone number</Link></h1>
             <div className='flex flex-nowrap gap-1'><h1><Link className="hover:bg-sky-600" to="/cpass">change password</Link></h1></div>
             <br/>
             <h1> My Posts: 
@@ -108,6 +140,27 @@ function Profile() {
                   </Link>
                   </div>
                   <button onClick={() => handleDelete(blog.id)}><i class='bx bxs-trash bx-burst-hover'></i></button>
+                </div>
+              ))}
+              </div>
+            </h1>
+            <h1> My Favorite Posts: 
+              <div>
+          {favBlog.map((blog) => ( 
+          <div className='flex flex-col items-center justify-evenly'>
+              <div className='border-solid border-4 border-sky-800 bg-sky-600'>
+                  <Link to={`/post/${blog.BlogId}`}>
+                    <div >{blog.BlogId}</div>
+                    <div ><img className='max-w-xs' alt='image' src={`https://minpro-blog.purwadhikabootcamp.com/${blog.imageURL}`}/></div>
+                    <div className='font-bold' >{blog.Blog.title}</div>
+                    <div>{blog.Blog.content}</div>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge color="info">
+                        {blog.Blog.Category.name}
+                      </Badge>
+                    </div>
+                  </Link>
+                  </div>
                 </div>
               ))}
               </div>

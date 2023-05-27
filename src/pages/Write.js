@@ -4,6 +4,8 @@ import axios from "axios";
 import { LoginContext } from "../App";
 import { Label, TextInput, Textarea } from "flowbite-react";
 
+import withAuth from "../components/withAuth";
+
 const Write = () => {
   const [value, setValue] = useState("");
 
@@ -29,6 +31,7 @@ const Write = () => {
   };
 
   return (
+
     <Formik
       initialValues={{
         file: null,
@@ -99,8 +102,8 @@ const Write = () => {
                 </div>
               </div>
             </div>
-            <div className="menu">
-              <div className="item">
+            <div >
+              <div >
                 <h1>Publish</h1>
                 <span>
                   <b>Status:</b> Draft
@@ -117,16 +120,16 @@ const Write = () => {
                     props.setFieldValue("file", e.currentTarget.files[0]);
                   }}
                 />
-                <label className="file" htmlFor="file">
+                <label className="" htmlFor="file">
                   Upload Image
                 </label>
-                <div className="buttons">
-                  <button>Post!</button>
+                <div>
+                  <button type="submit">Post!</button>
                 </div>
               </div>
-              <div className="item">
+              <div >
                 <h1>Category</h1>
-                <div className="cat">
+                <div >
                   <input
                     type="radio"
                     name="CategoryId"
@@ -207,4 +210,4 @@ const Write = () => {
   );
 };
 
-export default Write;
+export default withAuth(Write);

@@ -27,6 +27,10 @@ import BlogSearch from "./pages/categories/BlogSearch";
 import ChangePassword from "./pages/ChangePassword";
 import BlogTopTen from "./pages/categories/BlogTopTen";
 import ChangeUsername from "./pages/ChangeUsername";
+import ChangeEmail from "./pages/ChangeEmail";
+import ChangePhone from "./pages/ChangePhone";
+import ChangeProfileP from "./pages/ChangeProfileP";
+
 
 function LayoutLogged(){
   if(localStorage.getItem("token")){
@@ -113,6 +117,18 @@ const router = createBrowserRouter([
       {
         path: "/cusername",
         element: <ChangeUsername/>,
+      },
+      {
+        path: "/cemail",
+        element: <ChangeEmail/>,
+      },
+      {
+        path: "/cphone",
+        element: <ChangePhone/>,
+      },
+      {
+        path: "/changepp",
+        element: <ChangeProfileP/>,
       },
 ]);
 
