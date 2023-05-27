@@ -15,27 +15,42 @@ import 'boxicons';
 
 
 const Home = () => {
-
+  const navigate = useNavigate();
   const [blogData, setBlogs] = useState([]);
   const [likes, setLikes] = useState("");
   const [favData, setFavData] = useState([]);
+  const [allBlogData, setAllBlogs] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const navigate = useNavigate();
+  useEffect(() => {
 
-  useEffect((page) => {
-
-    axios(`https://minpro-blog.purwadhikabootcamp.com/api/blog/?page=${page}&sort=DESC`)
+    axios(`https://minpro-blog.purwadhikabootcamp.com/api/blog/?sort=DESC`)
     .then((response) => {
-      console.log(response.data);
       const blogs1 = response.data;
-      console.log(blogs1.result);
+      setTotalPages(blogs1.page);
       setBlogs(blogs1.result);
     })
     .catch((err) => console.log(err))
 
-    console.log(blogData)
-
   }, [])
+
+  const fetchData = (page) => {
+  
+    try{
+      axios(
+        `https://minpro-blog.purwadhikabootcamp.com/api/blog?sort=DESC&page=${page}`
+      ).then((response) => {
+          const blogs1 = response.data;
+          setCurrentPage(page);
+          setBlogs(blogs1.result);
+        });
+    }catch(error){
+      console.error(error);
+      return;
+    }
+
+  };
 
     const handleClick = (goblogId) => {
       const token = localStorage.getItem("token")
@@ -51,7 +66,6 @@ const Home = () => {
           },
 
         ).then((response) => {
-            console.log(response.data);
             setLikes(response);
           });
       }
@@ -59,20 +73,14 @@ const Home = () => {
     }
 
     const handleSearch = (values) => {
-    
-
-      console.log(values.cat);
-      console.log(values.sort);
-      console.log(values.search);
+  
 
       try{
         axios(
           `https://minpro-blog.purwadhikabootcamp.com/api/blog?id_cat=${values.cat}&sort=${values.sort}&search=${values.search}`
         ).then((response) => {
-            console.log(response.data);
-            const blogs3 = response.data;
-            console.log(blogs3.result);
-            setBlogs(blogs3.result);
+            const blogs1 = response.data;
+            setBlogs(blogs1.result);
           });
       }catch(error){
         console.error(error);
@@ -92,9 +100,8 @@ const Home = () => {
   useEffect(() => {
     axios("https://minpro-blog.purwadhikabootcamp.com/api/blog/pagFav")
     .then((response) => {
-      console.log(response.data);
-      const blogs2 = response.data;
-      let array = blogs2.result
+      const blogs1 = response.data;
+      let array = blogs1.result
       setFavData(array);
     })
     .catch((err) => console.log(err))
@@ -113,6 +120,11 @@ const Home = () => {
     }
   }
   
+  const onPageChange = (page) => {
+    if (page != currentPage) {
+        fetchData(page)
+    }
+};
 
   return (
     <div>
@@ -216,13 +228,16 @@ const Home = () => {
                   </Link>
                   </div>
                   <button onClick={() => handleClick(blog.id)}><i className='bx bx-tada-hover bxs-heart'></i></button>
-            {/* <Pagination
-              currentPage={1}
-              onPageChange={handlePageChange()}
-              totalPages={100}
-            /> */}
+            
         </div>
       ))}
+        <Pagination
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+          showIcons={true}
+          totalPages={totalPages}
+          className=""  
+        />
       </div>
       
     </div>

@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import { LoginContext } from "../App";
-import { Label, TextInput, Textarea } from "flowbite-react";
+import { Label, TextInput, Textarea, FileInput, Button } from "flowbite-react";
 
 import withAuth from "../components/withAuth";
 
@@ -28,6 +28,11 @@ const Write = () => {
         setValue(response.data);
       })
       .catch((err) => console.log(err));
+
+      setTimeout(() => {
+        navigate("/");
+    }, 2000);
+
   };
 
   return (
@@ -104,28 +109,23 @@ const Write = () => {
             </div>
             <div >
               <div >
-                <h1>Publish</h1>
-                <span>
-                  <b>Status:</b> Draft
-                </span>
-                <span>
-                  <b>Visibility:</b> Public
-                </span>
-                <input
-                  style={{ display: "none" }}
-                  type="file"
-                  name="file"
-                  id="file"
-                  onChange={(e) => {
-                    props.setFieldValue("file", e.currentTarget.files[0]);
-                  }}
-                />
-                <label className="" htmlFor="file">
-                  Upload Image
-                </label>
-                <div>
-                  <button type="submit">Post!</button>
-                </div>
+                <div className="mb-2 block">
+                        <Label
+                            htmlFor="file"
+                            value="Upload picture file here"
+                        />
+                        <FileInput
+                        type="file"
+                        name="file"
+                        id="file"
+                        className="file" 
+                        htmlFor="file"
+                        onChange={(e) => {
+                            props.setFieldValue("file", e.currentTarget.files[0]);
+                        }}
+                        />
+                    </div>
+                
               </div>
               <div >
                 <h1>Category</h1>
@@ -198,6 +198,9 @@ const Write = () => {
                     onChange={props.handleChange}
                   />
                   <label htmlFor="Fiksi">Fiksi</label>
+                  <div>
+                  <Button size="lg" type="submit">Post</Button>
+                  </div>
                 </div>
               </div>
               <form />

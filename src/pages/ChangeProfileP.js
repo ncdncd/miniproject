@@ -3,17 +3,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from "yup"
-import { Label, TextInput, Button } from 'flowbite-react';
+import { Label, TextInput, Button, FileInput } from 'flowbite-react';
 
 function ChangeProfileP() {
-
-    const [profile, setProfile] = useState("");
-
+ 
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
-  const token = localStorage.getItem("token");
-
-  const handleSubmit = (profileFile, action) => {
+    const [profile, setProfile] = useState("");  
+    
+    const handleSubmit = (profileFile, action) => {
 
     console.log(profileFile.file, "deez")
 
@@ -54,23 +53,28 @@ function ChangeProfileP() {
             >
               {(props) => (
                 <form onSubmit={props.handleSubmit} className='flex flex-col gap-4'>
-                  <div>
-                  <input
-                  style={{ display: "none" }}
-                  type="file"
-                  name="file"
-                  id="file"
-                  onChange={(e) => {
-                    props.setFieldValue("file", e.currentTarget.files[0]);
-                  }}
-                />
-                <label className="file" htmlFor="file">
-                  Upload Image
-                </label>
-                  <Button className='text-white' type="submit">Upload</Button>
-            
-                  </div>
+                    <div id="fileUpload">
+                        <div className="mb-2 block">
+                        <Label
+                            htmlFor="file"
+                            value="Upload picture file here"
+                        />
+                        <FileInput
+                        type="file"
+                        name="file"
+                        id="file"
+                        className="file" 
+                        htmlFor="file"
+                        onChange={(e) => {
+                            props.setFieldValue("file", e.currentTarget.files[0]);
+                        }}
+                        />
+                        <Button className='text-white' size="small" type="submit">Upload</Button>
+                    
+                        </div>
+                    </div>
                 </form>
+                
               )}
 
             </Formik>

@@ -50,10 +50,6 @@ function Login() {
       }, 3000);
   };
 
-  function testFunction() {
-    handlePasswordChange();
-    handleChange();
-}
 
   const initialValues = {
     username:'',

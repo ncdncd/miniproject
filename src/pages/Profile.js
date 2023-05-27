@@ -15,6 +15,7 @@ function Profile() {
     const [userData, setUserData] = useState({});
     const [myBlogData, setMyBlogs] = useState([]);
     const [favBlog, setMyFavBlogs] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
 
 
   useEffect(() => {
@@ -95,7 +96,13 @@ function Profile() {
 
   };
 
-  console.log(userData)
+  const handleToggleModal = (id) => {
+    setModalOpen(!modalOpen);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   const profileImg = (imgsrc) => {
     if(imgsrc === null){
@@ -121,6 +128,11 @@ function Profile() {
             <h1><Link className="hover:bg-sky-600" to="/cphone">change phone number</Link></h1>
             <div className='flex flex-nowrap gap-1'><h1><Link className="hover:bg-sky-600" to="/cpass">change password</Link></h1></div>
             <br/>
+
+            {/* <Button onClick={handleToggleModal}>
+              Toggle modal
+            </Button> */}
+
             <h1> My Posts: 
               <div>
           {myBlogData.map((blog) => ( 
@@ -139,7 +151,39 @@ function Profile() {
                     </div>
                   </Link>
                   </div>
-                  <button onClick={() => handleDelete(blog.id)}><i class='bx bxs-trash bx-burst-hover'></i></button>
+                  <button onClick={handleToggleModal}><i class='bx bxs-trash bx-burst-hover'></i></button>
+                  {/* <button onClick={() => handleDelete(blog.id)}><i class='bx bxs-trash bx-burst-hover'></i></button> */}
+                  <Modal
+                    onClose={handleCloseModal}
+                    popup
+                    show = {modalOpen}
+                    size="md"
+                  >
+                    <Modal.Header />
+                      <Modal.Body>
+                        <div className="text-center">
+                          
+                          <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                            are you sure you want to delete this post?
+                          </h3>
+                          <div className="flex justify-center gap-4">
+                            <Button
+                              color="failure"
+                              onClick={() => handleDelete()}
+                            >
+                              Yes, I'm sure
+                              {blog.id}
+                            </Button>
+                            <Button
+                              color="gray"
+                              onClick={handleCloseModal}
+                            >
+                              No, cancel
+                              </Button>
+                            </div>
+                          </div>
+                        </Modal.Body>
+                      </Modal>
                 </div>
               ))}
               </div>
