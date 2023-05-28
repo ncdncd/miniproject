@@ -73,6 +73,30 @@ const Home = () => {
     }
 
     const handleSearch = (values) => {
+
+      if(values.cat === "Bisnis"){
+        values.cat = "1"
+      }else if(values.cat === "Ekonomi"){
+        values.cat = "2"
+      }else if(values.cat === "Teknologi"){
+        values.cat = "3"
+      }else if(values.cat === "Olahraga"){
+        values.cat = "4"
+      }else if(values.cat === "Kuliner"){
+        values.cat = "5"
+      }else if(values.cat === "Internasional"){
+        values.cat = "6"
+      }else if(values.cat === "Fiksi"){
+        values.cat = "7"
+      }else if(values.cat === "Semua"){
+        values.cat = ""
+      }
+
+      if(values.sort === "urut dari terlama"){
+        values.sort = "ASC"
+      }else if(values.sort === "urut dari terbaru"){
+        values.sort = "DESC"
+      }
   
 
       try{
@@ -152,18 +176,18 @@ const Home = () => {
                     defaultValue={props.values.search}
                 />
                 <select className='rounded-full' name="sort" value={props.values.sort} onChange={props.handleChange}> 
-                  <option name="ASC" >ASC</option>
-                  <option name="DESC">DESC</option>
+                  <option name="ASC" >urut dari terlama</option>
+                  <option name="DESC">urut dari terbaru</option>
                 </select>
                 <select className='rounded-full' name="cat" value={props.values.cat} onChange={props.handleChange}> 
-                  <option name="bisnis" >1</option>
-                  <option name="ekonomi">2</option>
-                  <option name="teknologi" >3</option>
-                  <option name="olahraga">4</option>
-                  <option name="kuliner" >5</option>
-                  <option name="internasional">6</option>
-                  <option name="fiksi">7</option>
-                  <option name="semua"></option>
+                  <option name="bisnis" >Bisnis</option>
+                  <option name="ekonomi">Ekonomi</option>
+                  <option name="teknologi" >Teknologi</option>
+                  <option name="olahraga">Olahraga</option>
+                  <option name="kuliner" >Kuliner</option>
+                  <option name="internasional">Internasional</option>
+                  <option name="fiksi">Fiksi</option>
+                  <option name="semua">Semua</option>
                 </select>
                 
                 <button className="px-2 text-white bg-sky-600 rounded-full ">

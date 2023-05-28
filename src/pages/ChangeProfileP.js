@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from "yup"
@@ -35,8 +35,8 @@ function ChangeProfileP() {
       console.log(profile, "nuts")
 
       setTimeout(() => {
-        navigate("/profile");
-    }, 2000);
+        navigate("/")
+    }, 3000);
   };
     
       const initialValues = {

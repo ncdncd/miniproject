@@ -59,7 +59,7 @@ function ResetPassword() {
 
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
-      <h1 className=''>Register</h1>
+      <h1 className=''>Reset Password</h1>
       <div>
       <Formik
       initialValues={initialValues}

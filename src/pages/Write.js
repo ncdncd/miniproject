@@ -1,13 +1,16 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
-import { LoginContext } from "../App";
 import { Label, TextInput, Textarea, FileInput, Button } from "flowbite-react";
+import { Link, useNavigate } from 'react-router-dom';
 
 import withAuth from "../components/withAuth";
+import { LoginContext } from "../App";
 
 const Write = () => {
   const [value, setValue] = useState("");
+
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
 
