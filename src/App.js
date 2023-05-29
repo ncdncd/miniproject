@@ -32,7 +32,11 @@ import ChangePhone from "./pages/ChangePhone";
 import ChangeProfileP from "./pages/ChangeProfileP";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/resetPassword";
-
+import BlogInternasional from "./pages/categories/BlogInternasional";
+import BlogKuliner from "./pages/categories/BlogKuliner";
+import BlogBisnis from "./pages/categories/BlogBisnis";
+import BlogEkonomi from "./pages/categories/BlogEkonomi";
+import BlogFiksi from "./pages/categories/BlogFiksi";
 
 function LayoutLogged(){
   if(localStorage.getItem("token")){
@@ -85,6 +89,26 @@ const router = createBrowserRouter([
       {
         path: "/bolahraga",
         element: <BlogOlahraga/>,
+      },
+      {
+        path: "/bekonomi",
+        element: <BlogEkonomi/>,
+      },
+      {
+        path: "/bisnis",
+        element: <BlogBisnis/>,
+      },
+      {
+        path: "/bkuli",
+        element: <BlogKuliner/>,
+      },
+      {
+        path: "/binter",
+        element: <BlogInternasional/>,
+      },
+      {
+        path: "/bfiksi",
+        element: <BlogFiksi/>,
       },
       {
         path: "/bsearch",

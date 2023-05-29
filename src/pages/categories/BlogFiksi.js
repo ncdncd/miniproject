@@ -9,10 +9,10 @@ import { useEffect, useState } from "react"
 import axios from 'axios';
 import { Carousel, Badge, Avatar } from 'flowbite-react';
 
-function BlogOlahraga() {
+function BlogFiksi() {
     const [blogData, setBlogs] = useState([]);
 
-    const url = "https://minpro-blog.purwadhikabootcamp.com/api/blog?id_cat=4&sort=DESC";
+    const url = "https://minpro-blog.purwadhikabootcamp.com/api/blog?id_cat=7&sort=DESC";
   
     useEffect(() => {
       axios(url)
@@ -78,4 +78,4 @@ function BlogOlahraga() {
   )
 }
 
-export default BlogOlahraga
+export default BlogFiksi
